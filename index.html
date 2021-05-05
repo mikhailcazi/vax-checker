@@ -26,6 +26,8 @@
             #sub-header {background-color: #584155;padding: 10px;color: white;font-size: 15px;margin: 0px;}
             #header { padding: 10px; background-color: #131a1b; color: white; font-family: 'Montserrat', sans-serif; text-shadow: 1px 2px 2px #0a1b0a; }
             #footer { padding: 10px; background-color: #584155; color: white; font-family: 'Montserrat', sans-serif;  bottom: 0px; position: fixed; font-size: small}
+            span.separator {font-size: 18px;}
+
             @media only screen and (max-width: 700px) {
                 body, table, #form, input, button, #sub-header {
                     font-size: 3vw
@@ -38,6 +40,7 @@
                     float: none;
                 }
             }
+            
         </style>
         <script>
             var url, statusText, resultText, resultTable, tBody, intervalID, age, refreshText, storedDistrict, enableNotifications;
@@ -295,10 +298,10 @@
                 
                 <label for="district">District ID:</label>
                 <input class="textInput "type="text" id="district" name="district" >
-                <br>
+                <span class="separator">|</span>
                 <label for="time">Refresh Time (s):</label>
                 <input class="textInput" type="text" id="time" name="time" value="60" >
-                <br>
+                <span class="separator">|</span>
                 <label for="gender">Age:</label>
                 <input type="radio" id="under44" name="gender" value="under44" checked>
                 <label for="under44">18-44</label>
@@ -306,10 +309,12 @@
                 <label for="above45">45+</label>
                 <input type="radio" id="all" name="gender" value="all">
                 <label for="all">All</label>
-                <br>   
+                <span class="separator">|</span>
 
                 <input type="checkbox" id="notif-check" name="notif-check" value="notif" checked>
-                <label for="notif-check">Enable Desktop Notifications</label><br>
+                <label for="notif-check">Enable Desktop Notifications</label>
+                
+                <br>
 
                 <button onclick="startChecking()">Start Search</button>
                 <button disabled id="stopButton" onclick="stopChecking()">Stop Search</button>
