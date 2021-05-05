@@ -141,7 +141,15 @@
                 downloadDistrictFile(allDistricts);
             }
 
-            async function httpGet(theUrl)
+            function httpGet(theUrl)
+            {
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+                xmlHttp.send( null );
+                return xmlHttp.responseText;
+            }
+
+            async function httpGetFetch(theUrl)
             {
                 const response = await fetch(theUrl);
                 return response.json();
@@ -197,7 +205,7 @@
             function makeCall(){ 
                 let sessionFound = false, openSessions = 0;
                 clearTable(false);
-                httpGet(url).then(result => {
+                httpGetFetch(url).then(result => {
                     statusText.innerText = getRefreshText() + '\nRefreshing every ' +(refreshTime/1000) +' seconds...';
                     document.getElementById('stopButton').disabled = false;
 
