@@ -2,24 +2,29 @@
     <head>
         <title>VaxChecker</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
         <style>
-            body { font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 12px;}
+            body { font-family: 'Montserrat', sans-serif; font-size: 15px; margin: 0px}
             table {width: 100%; border : 2px solid black; border-collapse: collapse; text-align: center;}
             th, td { border: 1px solid black; }
             thead { background-color: #7fbcc3;}
             #status { float: right; color: grey; font-style: italic; margin: 9px;}
             #loading {width: 34px;}
-            .textInput {width: 50px; border: 0; padding: 5px 5px; border-bottom: 1px solid #ccc; outline: 0; }
+            .textInput {width: 50px; border: 0; padding: 5px 5px; border-bottom: 1px solid #ccc; outline: 0; font-family: 'Montserrat', sans-serif; }
             #gifCanvas { float: right;}
-            #form { display: inline-block; padding: 10px; font-size: 12px; width: 99%;}
+            #form { display: inline-block; padding: 10px; font-size: 15px; width: 99%;}
             #refreshIcon { position: absolute; top: 20%; left: 50%; width: 50px;}
-            button{ margin: 5px; border-radius: 5px;background:#669e82;color:#fff;border:none;position:relative;  height:30px;cursor:pointer;transition:800ms ease all;outline:none;}
+            #body {margin: 10px;}
+            #desc-text { background-color: #584155; padding: 10px;color: white; font-size: 15px ;margin: 0px;}
+            button{ font-family: 'Montserrat', sans-serif; margin: 5px; border-radius: 5px;background:#669e82;color:#fff;border:none;position:relative;  height:30px;cursor:pointer;transition:800ms ease all;outline:none;}
             button:enabled:hover{background:#fff;color:#669e82;}
             button:before,button:after{content:'';position:absolute;top:0;right:0;height:2px;width:0;background: #669e82;transition:400ms ease all;            }
             button:after{right:inherit;top:inherit;left:0;bottom:0;}
             button:enabled:hover:before,button:enabled:hover:after{width:100%;transition:800ms ease all;}
             button:disabled {background:#b1c9c3}
-            #header { padding: 10px; background-color: #131a1b; color: white; font-family: 'Trebuchet MS', sans-serif; text-shadow: 1px 2px 2px #0a1b0a;}
+            #header { padding: 10px; background-color: #131a1b; color: white; font-family: 'Montserrat', sans-serif; text-shadow: 1px 2px 2px #0a1b0a;}
+            #footer { padding: 10px; background-color: #584155; color: white; font-family: 'Montserrat', sans-serif;  bottom: 0px; position: fixed; width: 100%; font-size: small}
             @media only screen and (max-width: 700px) {
                 body, table, #form, input, button {
                     font-size: 4vw
@@ -273,53 +278,63 @@
         <div id="header">
             <h1>VaxChecker</h1>
         </div>
-        <div id="form">
-            <button style="float: right;" onclick="getAllDistricts()">Get District ID List</button>
-            
-            <label for="district">District:</label>
-            <input class="textInput "type="text" id="district" name="district" >
-
-            <label for="time">Refresh Time (s):</label>
-            <input class="textInput" type="text" id="time" name="time" value="60" >
-
-            <input type="radio" id="under44" name="gender" value="under44" checked>
-            <label for="under44">18-44</label>
-            <input type="radio" id="above45" name="gender" value="above45">
-            <label for="above45">45+</label>
-            <input type="radio" id="all" name="gender" value="all">
-            <label for="all">All</label>
-
-            <button onclick="startChecking()">Start Search</button>
-            <button disabled id="stopButton" onclick="stopChecking()">Stop Search</button>
-
-            <input type="checkbox" id="notif-check" name="notif-check" value="notif" checked>
-            <label for="notif-check">Enable Desktop Notifications</label><br>
+        <div id='sub-header'>
+            <p id="desc-text">
+                A tool to periodically check availability of COVID-19 vaccination slots in India.<br>
+                Enter your district ID and click 'Start Search'. <br>
+                If you do not know your district ID, click the 'Get District ID List' button on the right to get a list of districts and corresponding IDs. <br>
+                The application will send desktop notifications (if enabled) whenever an available slot has been encountered.
+            </p>
         </div>
-        
-        <hr>
-
-        <span id="status"></span>
-        <span id="gifCanvas"></span>
-        <table cellpadding="2" cellspacing="2" id="resultTable">
-            <thead>
-                <tr>
-                    <th colspan="2">CENTRE</th>
-                    <th colspan="2">SESSIONS</th>
-                </tr>
-                <tr>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Vaccine</th>
-                    <th>Available Capacity</th>
-                </tr>
-            </thead>
-            <tbody id="tBody">
-                <tr><td style="height: 100px;" colspan="4">Click 'Start Search' to display results.</td></tr>
-                <tr></tr>
-                <tr></tr>
-                <tr></tr>
-            </tbody>
-        </table>
-        <p id="result"></p>
+        <div id="body">
+            
+            <div id="form">
+                <button style="float: right;" onclick="getAllDistricts()">Get District ID List</button>
+                
+                <label for="district">District ID:</label>
+                <input class="textInput "type="text" id="district" name="district" >
+    
+                <label for="time">Refresh Time (s):</label>
+                <input class="textInput" type="text" id="time" name="time" value="60" >
+    
+                <input type="radio" id="under44" name="gender" value="under44" checked>
+                <label for="under44">18-44</label>
+                <input type="radio" id="above45" name="gender" value="above45">
+                <label for="above45">45+</label>
+                <input type="radio" id="all" name="gender" value="all">
+                <label for="all">All</label>
+    
+                <button onclick="startChecking()">Start Search</button>
+                <button disabled id="stopButton" onclick="stopChecking()">Stop Search</button>
+    
+                <input type="checkbox" id="notif-check" name="notif-check" value="notif" checked>
+                <label for="notif-check">Enable Desktop Notifications</label><br>
+            </div>
+            
+            <hr>
+    
+            <span id="status"></span>
+            <span id="gifCanvas"></span>
+            <table cellpadding="2" cellspacing="2" id="resultTable">
+                <thead>
+                    <tr>
+                        <th colspan="2">CENTRE</th>
+                        <th colspan="2">SESSIONS</th>
+                    </tr>
+                    <tr>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Vaccine</th>
+                        <th>Available Capacity</th>
+                    </tr>
+                </thead>
+                <tbody id="tBody">
+                    <tr><td style="height: 100px;" colspan="4">Click 'Start Search' to display results.</td></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                </tbody>
+            </table>
+        </div>
     </body>
 </html>
