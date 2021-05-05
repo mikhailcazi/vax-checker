@@ -152,14 +152,25 @@
             }
 
             function startChecking() {
+                const district = document.getElementById('district').value;
+                refreshTime = document.getElementById('time').value * 1000;
+
+                if(!district) {
+                    return window.alert('Please enter District ID!');
+                }
+                localStorage.setItem("district", district);
+
+                if(!refreshTime) {
+                    refreshTime = 60000;
+                }
+                
                 if(intervalID) {
                     clearInterval(intervalID);
                 } else {
                     var img = document.getElementById('gifCanvas').innerHTML ='<img id="loading" src="./loading.gif">'
                 }
-                const district = document.getElementById('district').value;
-                localStorage.setItem("district", district);
-                refreshTime = document.getElementById('time').value * 1000;
+
+
                 const date = getDate(new Date());
                 getAge();
                 url = 'https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=' + district + '&date=' + date;
