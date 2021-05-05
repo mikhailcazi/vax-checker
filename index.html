@@ -1,6 +1,7 @@
 <html>
     <head>
-        <title>CheckVax</title>
+        <title>VaxChecker</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
             body { font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 12px;}
             table {width: 100%; border : 2px solid black; border-collapse: collapse; text-align: center;}
@@ -10,7 +11,7 @@
             #loading {width: 34px;}
             .textInput {width: 50px; border: 0; padding: 5px 5px; border-bottom: 1px solid #ccc; outline: 0; }
             #gifCanvas { float: right;}
-            #form { display: inline-block; padding: 10px; font-size: 12px;}
+            #form { display: inline-block; padding: 10px; font-size: 12px; width: 99%;}
             #refreshIcon { position: absolute; top: 20%; left: 50%; width: 50px;}
             button{ margin: 5px; border-radius: 5px;background:#669e82;color:#fff;border:none;position:relative;  height:30px;cursor:pointer;transition:800ms ease all;outline:none;}
             button:enabled:hover{background:#fff;color:#669e82;}
@@ -18,6 +19,7 @@
             button:after{right:inherit;top:inherit;left:0;bottom:0;}
             button:enabled:hover:before,button:enabled:hover:after{width:100%;transition:800ms ease all;}
             button:disabled {background:#b1c9c3}
+            #header { padding: 10px; background-color: #131a1b; color: white; font-family: 'Trebuchet MS', sans-serif; text-shadow: 1px 2px 2px #0a1b0a;}
             @media only screen and (max-width: 700px) {
                 body, table, #form, input, button {
                     font-size: 4vw
@@ -216,7 +218,7 @@
             }
 
             function makeCall(){ 
-                let sessionFound = false, openSessions = 0;
+                let sessionFound = false, openSessions = 0, gridEmpty = true;
                 clearTable(false);
                 httpGetFetch(url).then(result => {
                     statusText.innerText = getRefreshText() + '\nRefreshing every ' +(refreshTime/1000) +' seconds...';
@@ -225,6 +227,7 @@
                     result.centers.forEach(centre => {
                         centre.sessions.forEach(sesh => {
                             if((age && sesh["min_age_limit"] === age) || !age) {
+                                gridEmpty = false;
                                 if(sesh["available_capacity"] > 0) {
                                     sessionFound = true;
                                     openSessions++;
@@ -235,6 +238,10 @@
                             }
                         })
                     });
+
+                    if(gridEmpty) {
+                        clearTable(true)
+                    }
                     
                     if(sessionFound && document.getElementById('notif-check').checked) {
                         notifyMe(openSessions);
@@ -255,7 +262,7 @@
 
             function clearTable (noSessions) {
                 if(noSessions) {
-                    tBody.innerHTML = '<tr><td colspan="4">There are no slots currently available. Refreshing every ' +(refreshTime/1000) +' seconds...</td></tr>'
+                    tBody.innerHTML = '<tr><td colspan="4">There are no slots currently available.</td></tr>'
                 } else {
                     tBody.innerText = ''
                 }
@@ -263,8 +270,11 @@
             </script>
     </head>
     <body>
+        <div id="header">
+            <h1>VaxChecker</h1>
+        </div>
         <div id="form">
-            <button onclick="getAllDistricts()">Get District ID List</button>
+            <button style="float: right;" onclick="getAllDistricts()">Get District ID List</button>
             
             <label for="district">District:</label>
             <input class="textInput "type="text" id="district" name="district" >
@@ -303,7 +313,12 @@
                     <th>Available Capacity</th>
                 </tr>
             </thead>
-            <tbody id="tBody"></tbody>
+            <tbody id="tBody">
+                <tr><td style="height: 100px;" colspan="4">Click 'Start Search' to display results.</td></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+            </tbody>
         </table>
         <p id="result"></p>
     </body>
