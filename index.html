@@ -12,12 +12,24 @@
             #gifCanvas { float: right;}
             #form { display: inline-block; padding: 10px; font-size: 12px;}
             #refreshIcon { position: absolute; top: 20%; left: 50%; width: 50px;}
-            button{ border-radius: 5px;background:#669e82;color:#fff;border:none;position:relative;  height:30px;cursor:pointer;transition:800ms ease all;outline:none;}
+            button{ margin: 5px; border-radius: 5px;background:#669e82;color:#fff;border:none;position:relative;  height:30px;cursor:pointer;transition:800ms ease all;outline:none;}
             button:enabled:hover{background:#fff;color:#669e82;}
             button:before,button:after{content:'';position:absolute;top:0;right:0;height:2px;width:0;background: #669e82;transition:400ms ease all;            }
             button:after{right:inherit;top:inherit;left:0;bottom:0;}
             button:enabled:hover:before,button:enabled:hover:after{width:100%;transition:800ms ease all;}
             button:disabled {background:#b1c9c3}
+            @media only screen and (max-width: 700px) {
+                body, table, #form, input, button {
+                    font-size: 4vw
+                }
+                #loading {
+                    width: 10vw;
+                }
+                #gifCanvas {
+                    margin-left: 45%;
+                    float: none;
+                }
+            }
         </style>
         <script>
             var url, statusText, resultText, resultTable, tBody, intervalID, age, refreshText, storedDistrict, enableNotifications;
