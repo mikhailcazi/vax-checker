@@ -22,9 +22,9 @@
             button:after{right:inherit;top:inherit;left:0;bottom:0;}
             button:enabled:hover:before,button:enabled:hover:after{width:100%;transition:800ms ease all;}
             button:disabled {background:#b1c9c3}
-            #sub-header {width: 100%; background-color: #584155;padding: 10px;color: white;font-size: 15px;margin: 0px;}
-            #header { padding: 10px; background-color: #131a1b; color: white; font-family: 'Montserrat', sans-serif; text-shadow: 1px 2px 2px #0a1b0a; width: 100%;}
-            #footer { padding: 10px; background-color: #584155; color: white; font-family: 'Montserrat', sans-serif;  bottom: 0px; position: fixed; width: 100%; font-size: small}
+            #sub-header {background-color: #584155;padding: 10px;color: white;font-size: 15px;margin: 0px;}
+            #header { padding: 10px; background-color: #131a1b; color: white; font-family: 'Montserrat', sans-serif; text-shadow: 1px 2px 2px #0a1b0a; }
+            #footer { padding: 10px; background-color: #584155; color: white; font-family: 'Montserrat', sans-serif;  bottom: 0px; position: fixed; font-size: small}
             @media only screen and (max-width: 700px) {
                 body, table, #form, input, button {
                     font-size: 3vw
@@ -263,6 +263,7 @@
                 tr.insertCell().appendChild(document.createTextNode(centre.address));
                 tr.insertCell().appendChild(document.createTextNode(session.vaccine));
                 tr.insertCell().appendChild(document.createTextNode(session.available_capacity));
+                tr.insertCell().appendChild(document.createTextNode(session.date));
             }
 
             function clearTable (noSessions) {
@@ -319,17 +320,18 @@
                 <thead>
                     <tr>
                         <th colspan="2">CENTRE</th>
-                        <th colspan="2">SESSIONS</th>
+                        <th colspan="3">SESSIONS</th>
                     </tr>
                     <tr>
                         <th>Name</th>
                         <th>Address</th>
                         <th>Vaccine</th>
                         <th>Available Capacity</th>
+                        <th>Date</th>
                     </tr>
                 </thead>
                 <tbody id="tBody">
-                    <tr><td style="height: 100px;" colspan="4">Click 'Start Search' to display results.</td></tr>
+                    <tr><td style="height: 100px;" colspan="5">Click 'Start Search' to display results.</td></tr>
                     <tr></tr>
                     <tr></tr>
                     <tr></tr>
