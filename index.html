@@ -17,7 +17,7 @@
             #form { display: inline-block; padding: 10px; font-size: 15px; width: 99%;}
             #refreshIcon { position: absolute; top: 20%; left: 50%; width: 50px;}
             #body {margin: 10px;}
-            button{ font-family: 'Montserrat', sans-serif; margin: 5px; border-radius: 5px;background:#669e82;color:#fff;border:none;position:relative;  height:30px;cursor:pointer;transition:800ms ease all;outline:none;}
+            button{ font-family: 'Montserrat', sans-serif; margin-top: 10px; border-radius: 5px;background:#669e82;color:#fff;border:none;position:relative;  height:30px;cursor:pointer;transition:800ms ease all;outline:none;}
             button:enabled:hover{background:#fff;color:#669e82;}
             button:before,button:after{content:'';position:absolute;top:0;right:0;height:2px;width:0;background: #669e82;transition:400ms ease all;            }
             button:after{right:inherit;top:inherit;left:0;bottom:0;}
@@ -27,7 +27,7 @@
             #header { padding: 10px; background-color: #131a1b; color: white; font-family: 'Montserrat', sans-serif; text-shadow: 1px 2px 2px #0a1b0a; }
             #footer { padding: 10px; background-color: #584155; color: white; font-family: 'Montserrat', sans-serif;  bottom: 0px; position: fixed; font-size: small}
             @media only screen and (max-width: 700px) {
-                body, table, #form, input, button {
+                body, table, #form, input, button, #sub-header {
                     font-size: 3vw
                 }
                 #loading {
@@ -295,22 +295,25 @@
                 
                 <label for="district">District ID:</label>
                 <input class="textInput "type="text" id="district" name="district" >
-    
+                <br>
                 <label for="time">Refresh Time (s):</label>
                 <input class="textInput" type="text" id="time" name="time" value="60" >
-    
+                <br>
+                <label for="gender">Age:</label>
                 <input type="radio" id="under44" name="gender" value="under44" checked>
                 <label for="under44">18-44</label>
                 <input type="radio" id="above45" name="gender" value="above45">
                 <label for="above45">45+</label>
                 <input type="radio" id="all" name="gender" value="all">
                 <label for="all">All</label>
-    
+                <br>   
+
+                <input type="checkbox" id="notif-check" name="notif-check" value="notif" checked>
+                <label for="notif-check">Enable Desktop Notifications</label><br>
+
                 <button onclick="startChecking()">Start Search</button>
                 <button disabled id="stopButton" onclick="stopChecking()">Stop Search</button>
     
-                <input type="checkbox" id="notif-check" name="notif-check" value="notif" checked>
-                <label for="notif-check">Enable Desktop Notifications</label><br>
             </div>
             
             <hr>
