@@ -10,7 +10,7 @@
             #loading {width: 34px;}
             .textInput {width: 50px; border: 0; padding: 5px 5px; border-bottom: 1px solid #ccc; outline: 0; }
             #gifCanvas { float: right;}
-            #form { display: inline-block; padding: 10px;}
+            #form { display: inline-block; padding: 10px; font-size: 12px;}
             #refreshIcon { position: absolute; top: 20%; left: 50%; width: 50px;}
             button{ border-radius: 5px;background:#669e82;color:#fff;border:none;position:relative;  height:30px;cursor:pointer;transition:800ms ease all;outline:none;}
             button:enabled:hover{background:#fff;color:#669e82;}
@@ -20,7 +20,7 @@
             button:disabled {background:#b1c9c3}
         </style>
         <script>
-            var url, statusText, resultText, resultTable, tBody, intervalID, age, refreshText, storedDistrict;
+            var url, statusText, resultText, resultTable, tBody, intervalID, age, refreshText, storedDistrict, enableNotifications;
             var refreshTime = 60000;
 
             window.onload = function() {
@@ -31,6 +31,17 @@
                 storedDistrict = localStorage.getItem("district");
                 if(storedDistrict) {
                     document.getElementById('district').value = storedDistrict;
+                }
+                enableNotifications = document.getElementById('notif-check').checked;
+                if(enableNotifications && window.Notification) {
+
+                    if (Notification.permission !== 'granted') {
+                        Notification.requestPermission().then(function (permission) {
+                        }).catch(function (err) {
+                            console.error(err);
+                        });
+                    }
+
                 }
             };
 
@@ -58,18 +69,8 @@
             }
 
             function notifyMe(openSessions) {
-                if (window.Notification) {
-                    if (Notification.permission === 'granted') {
-                        sendNotif(openSessions);
-                    } else {
-                        Notification.requestPermission().then(function (permission) {
-                            if (permission === 'granted') {
-                                sendNotif(openSessions);
-                            }
-                        }).catch(function (err) {
-                            console.error(err);
-                        });
-                    }
+                if (window.Notification && Notification.permission === 'granted') { 
+                    sendNotif(openSessions);
                 }
             }
             
@@ -223,7 +224,7 @@
                         })
                     });
                     
-                    if(sessionFound) {
+                    if(sessionFound && document.getElementById('notif-check').checked) {
                         notifyMe(openSessions);
                     }
                 });   
@@ -269,12 +270,14 @@
             <button onclick="startChecking()">Start Search</button>
             <button disabled id="stopButton" onclick="stopChecking()">Stop Search</button>
 
-            
+            <input type="checkbox" id="notif-check" name="notif-check" value="notif" checked>
+            <label for="notif-check">Enable Desktop Notifications</label><br>
         </div>
-        <span id="status"></span>
-        <span id="gifCanvas">
-        </span>
+        
         <hr>
+
+        <span id="status"></span>
+        <span id="gifCanvas"></span>
         <table cellpadding="2" cellspacing="2" id="resultTable">
             <thead>
                 <tr>
