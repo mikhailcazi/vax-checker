@@ -1,5 +1,2 @@
-function disp(name) {
-    console.log('Hello ' + name)
-}
-
-disp('Mikhail')
+const log = require('./logger');
+log('Helloooo')
