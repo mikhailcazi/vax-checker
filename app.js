@@ -1,2 +1,2 @@
 const log = require('./logger');
-log('Helloooo')
+log('Helloooo');
