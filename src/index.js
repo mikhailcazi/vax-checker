@@ -50,7 +50,7 @@ function getAge() {
 function sendNotif(openSessions) {
 	const notify = new Notification('Vaccination Slot Found!', {
 		body: openSessions + ' vaccination slot(s) found! Click to open the CoWin App.',
-		icon: './assets/images/vaccine.jpg',
+		icon: '../assets/images/vaccine.jpg',
 	});
 	notify.onclick = function (event) {
 		event.preventDefault();
@@ -165,7 +165,7 @@ function startChecking() {
 	if (intervalID) {
 		clearInterval(intervalID);
 	} else {
-		document.getElementById('gifCanvas').innerHTML = '<img id="loading" src="./assets/images/loading.gif">';
+		document.getElementById('gifCanvas').innerHTML = '<img id="loading" src="../assets/images/loading.gif">';
 	}
 
 
