@@ -16,7 +16,9 @@
     "url": "https://github.com/mikhailcazi/vax-checker/issues"
   },
   "homepage": "https://github.com/mikhailcazi/vax-checker#readme",
-  "dependencies": {},
+  "dependencies": {
+    "express": "^4.17.1"
+  },
   "devDependencies": {
     "eslint": "^7.26.0",
     "eslint-config-google": "^0.14.0"

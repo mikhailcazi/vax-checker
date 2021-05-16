@@ -135,7 +135,7 @@ function getAllDistricts() {
 
 function httpGet(theUrl) {
 	const xmlHttp = new XMLHttpRequest();
-	xmlHttp.open('GET', theUrl, false); // false for synchronous request
+	xmlHttp.open('GET', theUrl, false);
 	xmlHttp.send(null);
 	return xmlHttp.responseText;
 }
