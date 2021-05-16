@@ -2,7 +2,7 @@
   "name": "vax-checker",
   "version": "1.0.0",
   "description": "Initial release of Vax-Checker",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,10 +15,8 @@
   "bugs": {
     "url": "https://github.com/mikhailcazi/vax-checker/issues"
   },
-  "homepage": "https://mikhailcazi.github.io/vax-checker/",
-  "dependencies": {
-    "express": "^4.17.1"
-  },
+  "homepage": "https://github.com/mikhailcazi/vax-checker#readme",
+  "dependencies": {},
   "devDependencies": {
     "eslint": "^7.26.0",
     "eslint-config-google": "^0.14.0"

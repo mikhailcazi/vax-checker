@@ -1,0 +1,34 @@
+body { font-family: 'Montserrat', sans-serif; font-size: 15px; margin: 0px}
+table {width: 100%; border : 2px solid black; border-collapse: collapse; text-align: center;}
+th, td { border: 1px solid black; }
+thead { background-color: #7fbcc3;}
+#status { float: right; color: grey; font-style: italic; margin: 9px;}
+#loading {width: 34px;}
+.textInput {width: 50px; border: 0; padding: 5px 5px; border-bottom: 1px solid #ccc; outline: 0; font-family: 'Montserrat', sans-serif; }
+#gifCanvas { float: right;}
+#form { display: inline-block; padding: 10px; font-size: 15px; width: 99%;}
+#refreshIcon { position: absolute; top: 20%; left: 50%; width: 50px;}
+#body {margin: 10px;}
+button{ font-family: 'Montserrat', sans-serif; margin-top: 10px; border-radius: 5px;background:#669e82;color:#fff;border:none;position:relative;  height:30px;cursor:pointer;transition:800ms ease all;outline:none;}
+button:enabled:hover{background:#fff;color:#669e82;}
+button:before,button:after{content:'';position:absolute;top:0;right:0;height:2px;width:0;background: #669e82;transition:400ms ease all;            }
+button:after{right:inherit;top:inherit;left:0;bottom:0;}
+button:enabled:hover:before,button:enabled:hover:after{width:100%;transition:800ms ease all;}
+button:disabled {background:#b1c9c3}
+#sub-header {background-color: #584155;padding: 10px;color: white;font-size: 15px;margin: 0px;}
+#header { padding: 10px; background-color: #131a1b; color: white; font-family: 'Montserrat', sans-serif; text-shadow: 1px 2px 2px #0a1b0a; }
+#footer { padding: 10px; background-color: #584155; color: white; font-family: 'Montserrat', sans-serif;  bottom: 0px; position: fixed; font-size: small}
+span.separator {font-size: 18px;}
+
+@media only screen and (max-width: 700px) {
+    body, table, #form, input, button, #sub-header {
+        font-size: 3vw
+    }
+    #loading {
+        width: 10vw;
+    }
+    #gifCanvas {
+        margin-left: 45%;
+        float: none;
+    }
+}
