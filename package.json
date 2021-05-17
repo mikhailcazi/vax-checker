@@ -1,0 +1,23 @@
+{
+  "name": "vax-checker-front-end",
+  "version": "1.0.0",
+  "description": "Vax Checker Front End",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikhailcazi/vax-checker.git"
+  },
+  "author": "Mikhail Cazi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mikhailcazi/vax-checker/issues"
+  },
+  "homepage": "https://github.com/mikhailcazi/vax-checker#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^7.26.0"
+  }
+}
