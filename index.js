@@ -172,7 +172,7 @@ function startChecking() {
 
 	const date = getDate(new Date());
 	getAge();
-	url = `http://localhost:3000/api/sessionsByDistrict/${district}`;
+	url = `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=${district}&date=${date}`;
 
 	makeCall();
 	intervalID = setInterval(makeCall, refreshTime);
