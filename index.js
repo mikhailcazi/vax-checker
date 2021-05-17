@@ -19,7 +19,8 @@ window.onload = function () {
 	if (storedDistrict) {
 		document.getElementById('district').value = storedDistrict;
 	}
-	enableNotifications = document.getElementById('notif-check').checked;
+	enableNotifications = document.getElementById('notif-check').checked && false;
+
 	if (enableNotifications && window.Notification) {
 		if (Notification.permission !== 'granted') {
 			Notification.requestPermission().then(function (permission) {
@@ -50,7 +51,7 @@ function getAge() {
 function sendNotif(openSessions) {
 	const notify = new Notification('Vaccination Slot Found!', {
 		body: openSessions + ' vaccination slot(s) found! Click to open the CoWin App.',
-		icon: '../assets/images/vaccine.jpg',
+		icon: './assets/images/vaccine.jpg',
 	});
 	notify.onclick = function (event) {
 		event.preventDefault();
@@ -165,13 +166,13 @@ function startChecking() {
 	if (intervalID) {
 		clearInterval(intervalID);
 	} else {
-		document.getElementById('gifCanvas').innerHTML = '<img id="loading" src="../assets/images/loading.gif">';
+		document.getElementById('gifCanvas').innerHTML = '<img id="loading" src="./assets/images/loading.gif">';
 	}
 
 
 	const date = getDate(new Date());
 	getAge();
-	url = 'https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=' + district + '&date=' + date;
+	url = `http://localhost:3000/api/sessionsByDistrict/${district}`;
 
 	makeCall();
 	intervalID = setInterval(makeCall, refreshTime);
